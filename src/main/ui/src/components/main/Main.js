@@ -1,14 +1,7 @@
 import React, { useState } from "react";
-import {
-  ButtonsWrapper,
-  Container,
-  HeaderWrapper,
-  TablesWrapper,
-  TitleWrapper,
-} from "./Main.style";
-import { Button, Table, Modal } from "@iyadmosa/react-library/dist/cjs";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
-import { IconButton } from "@mui/material";
+import { Container, TablesWrapper, TitleWrapper } from "./Main.style";
+import { TableWithAddForm } from "@iyadmosa/react-library/build";
+import { DepositForm } from "../deposit/DepositForm";
 
 export const Main = () => {
   const columns = [
@@ -27,59 +20,46 @@ export const Main = () => {
       },
     },
   ];
-
-  const data = [
-    {
-      id: "1",
-      firstName: "iyada",
-    },
-  ];
+  const data = [];
   const [isDepositModalOpen, setDepositModalOpen] = useState(false);
   const [isWithdrawModalOpen, setWithdrawModalOpen] = useState(false);
+  const [depositValue, setDepositValue] = useState({
+    name: "iyada",
+    amount: "0",
+  });
+
   return (
-    <Container>
+    <Container className={"modal"}>
       <TitleWrapper>Main Page</TitleWrapper>
       <TablesWrapper>
-        <Table
+        <TableWithAddForm
           tableTitle={"Deposit"}
           minWidth={800}
           data={data}
           columns={columns}
-          addComponent={
-            <IconButton onClick={() => setDepositModalOpen(true)}>
-              <AddCircleIcon />
-            </IconButton>
+          addForm={
+            <DepositForm
+              value={depositValue}
+              onChange={(value) => setDepositValue({ ...depositValue, value })}
+            />
           }
+          modelTitle={"addn new deposit"}
         />
 
-        <Table
+        <TableWithAddForm
           tableTitle={"Withdraw"}
           minWidth={800}
           data={data}
           columns={columns}
-          addComponent={
-            <IconButton onClick={() => setWithdrawModalOpen(true)}>
-              <AddCircleIcon />
-            </IconButton>
+          addForm={
+            <DepositForm
+              value={depositValue}
+              onChange={(value) => setDepositValue({ ...depositValue, value })}
+            />
           }
+          modelTitle={"addn new withdraw"}
         />
       </TablesWrapper>
-      {isDepositModalOpen && (
-        <Modal
-          onClose={() => setDepositModalOpen(false)}
-          title={"Add new deposit"}
-        >
-          <div></div>
-        </Modal>
-      )}
-      {isWithdrawModalOpen && (
-        <Modal
-          onClose={() => setWithdrawModalOpen(false)}
-          title={"Add new withdraw"}
-        >
-          <div></div>
-        </Modal>
-      )}
     </Container>
   );
 };

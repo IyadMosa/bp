@@ -25,18 +25,3 @@ export const TitleWrapper = styled.div`
   text-transform: capitalize;
   color: #3c4144;
 `;
-
-export const HeaderWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  height: 40px;
-  padding: 20px;
-`;
-
-export const ButtonsWrapper = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  height: 60px;
-  padding: 5px;
-  gap: 15px;
-`;
