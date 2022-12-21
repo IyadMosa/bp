@@ -6,6 +6,11 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@iyadmosa/react-library": "^1.0.0-96",
+    "http-proxy-middleware": "^2.0.6",
+    "react-redux": "^7.1.1",
+    "react-redux-toastr": "^7.6.10",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
     "stream": "0.0.2",
     "styled-components": "^5.3.6",
     "web-vitals": "^2.1.4"

@@ -2,23 +2,24 @@ import React, { useState } from "react";
 import { Container } from "./Deposit.style";
 import { TextField, TextFieldRange } from "@iyadmosa/react-library";
 
-export const DepositForm = ({ disabled = false, onSubmit = () => 0 }) => {
-  const [depositBy, setDepositBy] = useState("");
-  const [amount, setAmount] = useState(0);
-
+export const DepositForm = ({
+  disabled = false,
+  value,
+  onChange = () => 0,
+}) => {
   return (
     <Container>
       <TextField
         title={"Deposit By"}
-        value={depositBy}
-        onChange={(value) => setDepositBy(value)}
+        value={value.depositBy}
+        onChange={(nv) => onChange({ ...value, depositBy: nv })}
         disabled={disabled}
         isRequired={true}
       />
       <TextFieldRange
         title={"Amount"}
-        value={amount}
-        onChange={(value) => setAmount(value)}
+        value={value.amount}
+        onChange={(nv) => onChange({ ...value, amount: nv })}
         disabled={disabled}
       />
     </Container>
