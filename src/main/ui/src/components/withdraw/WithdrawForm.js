@@ -11,7 +11,7 @@ export const WithdrawForm = ({
     <Container>
       <TextField
         title={"Withdraw By"}
-        value={value.depositBy}
+        value={value.by}
         onChange={(nv) => onChange({ ...value, depositBy: nv })}
         disabled={disabled}
         isRequired={true}
