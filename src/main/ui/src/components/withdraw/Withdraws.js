@@ -15,8 +15,12 @@ export const Withdraws = () => {
       accessor: "amount",
     },
     {
-      Header: "Deposit By",
-      accessor: "depositBy",
+      Header: "Person",
+      accessor: "person",
+    },
+    {
+      Header: "Reason",
+      accessor: "reason",
     },
     {
       Header: "Date",
@@ -27,20 +31,30 @@ export const Withdraws = () => {
   const data = useSelector((state) => state.withdraw.withdraws);
   const dispatch = useDispatch();
   const emptyValue = {
-    by: "",
+    person: "",
     amount: 1,
+    reason: "",
+    date: "",
   };
   const [value, setValue] = useState(emptyValue);
   useEffect(() => {
     dispatch(listAllWithdraws());
   }, []);
+  console.log(value);
   return (
     <TableScreen
       title={"Withdraws"}
       minWidth={800}
       data={data}
       columns={depositsColumns}
-      addForm={<WithdrawForm value={value} onChange={setValue} />}
+      addForm={
+        <WithdrawForm
+          value={value}
+          onChange={setValue}
+          persons={[]}
+          reasons={[]}
+        />
+      }
       onAddSubmit={() => {
         dispatch(addNewWithdraw(value));
         setValue(emptyValue);

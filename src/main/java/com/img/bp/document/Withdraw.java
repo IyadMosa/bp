@@ -25,7 +25,7 @@ public class Withdraw {
     private Long amount;
 
     @Field(type = FieldType.Text)
-    private String withdrawBy;
+    private String person;
 
     @Field(type = FieldType.Text)
     private String reason;

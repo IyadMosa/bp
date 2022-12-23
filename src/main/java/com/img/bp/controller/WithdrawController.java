@@ -32,7 +32,7 @@ public class WithdrawController {
         Withdraw withdraw = request.getWithdraw();
         withdraw.setDate(new Date());
         if (request.isAddToDeposit()) {
-            Deposit deposit = new Deposit(null, withdraw.getAmount(), withdraw.getWithdrawBy(), withdraw.getDate());
+            Deposit deposit = new Deposit(null, withdraw.getAmount(), withdraw.getPerson(), withdraw.getDate());
             depositService.add(deposit);
         }
         service.add(request.getWithdraw());

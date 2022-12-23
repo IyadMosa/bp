@@ -29,7 +29,7 @@ public class Deposit {
     private Long amount;
 
     @Field(type = FieldType.Text)
-    private String depositBy;
+    private String person;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATE_STANDER_FORMAT)
     @Field(type = FieldType.Date, format = DateFormat.epoch_millis)
