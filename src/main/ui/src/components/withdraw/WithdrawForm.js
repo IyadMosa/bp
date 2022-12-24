@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { Container } from "./Withdraw.style";
+import { Container, InnerContainer } from "./Withdraw.style";
 import {
   DatePickerCustom,
   Dropdown,
@@ -13,7 +13,7 @@ export const WithdrawForm = ({
   persons = [],
   reasons = [],
 }) => {
-  const { amount, person, reason, date } = value;
+  const { amount, person, reason } = value;
   const personsOptions = useMemo(
     () => [...persons.map((name) => ({ value: name, label: name }))],
     [persons]
@@ -25,27 +25,32 @@ export const WithdrawForm = ({
   );
   return (
     <Container>
-      <Dropdown
-        title={"Person"}
-        value={person}
-        options={personsOptions}
-        onChange={(nv) => onChange({ ...value, person: nv.value })}
-      />
-      <Dropdown
-        title={"Reason"}
-        value={reason}
-        options={reasonsOptions}
-        onChange={(nv) => onChange({ ...value, reason: nv.value })}
-      />
+      <InnerContainer>
+        <Dropdown
+          title={"Person"}
+          value={{ value: person, label: person }}
+          options={personsOptions}
+          onChange={(nv) => onChange({ ...value, person: nv.value })}
+          width={300}
+        />
+        <Dropdown
+          title={"Reason"}
+          value={{ value: reason, label: reason }}
+          options={reasonsOptions}
+          onChange={(nv) => onChange({ ...value, reason: nv.value })}
+          width={300}
+        />
+      </InnerContainer>
       <TextFieldRange
         title={"Amount"}
         value={amount}
         onChange={(nv) => onChange({ ...value, amount: nv })}
         disabled={disabled}
+        width={250}
       />
       <DatePickerCustom
-        date={"24-12-2022"}
         onChange={(nv) => onChange({ ...value, date: nv })}
+        width={100}
       />
     </Container>
   );
