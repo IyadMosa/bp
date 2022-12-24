@@ -6,6 +6,8 @@ import { MainScreen, EmptyScreen } from "@iyadmosa/react-library";
 import { Deposits } from "./components/deposit/Deposits";
 import { Withdraws } from "./components/withdraw/Withdraws";
 import React from "react";
+import { Reasons } from "./components/reason/Reasons";
+import { Person } from "@material-ui/icons";
 function App() {
   const brand = { name: "NavbarScroller", to: "/main" };
   const links = [
@@ -23,6 +25,16 @@ function App() {
       name: "Withdraws",
       to: "/withdraws",
       component: <Withdraws />,
+    },
+    {
+      name: "Persons",
+      to: "/persons",
+      component: <Person />,
+    },
+    {
+      name: "Reasons",
+      to: "/reasons",
+      component: <Reasons />,
     },
   ];
 
