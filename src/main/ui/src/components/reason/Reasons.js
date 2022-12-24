@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { TableScreen } from "@iyadmosa/react-library/build";
 import { useDispatch, useSelector } from "react-redux";
-import { addNewWithdraw, listAllWithdraws } from "../../actions/WithdrawAction";
+import { addReason, listReasons } from "../../actions/ReasonAction";
 import { ReasonForm } from "./ReasonForm";
 
 export const Reasons = () => {
@@ -16,14 +16,14 @@ export const Reasons = () => {
     },
   ];
 
-  const data = useSelector((state) => state.withdraw.withdraws);
+  const data = useSelector((state) => state.reason.reasons);
   const dispatch = useDispatch();
   const emptyValue = {
     name: "",
   };
   const [value, setValue] = useState(emptyValue);
   useEffect(() => {
-    dispatch(listAllWithdraws());
+    dispatch(listReasons());
   }, []);
   return (
     <TableScreen
@@ -33,9 +33,9 @@ export const Reasons = () => {
       columns={columns}
       addForm={<ReasonForm value={value} onChange={setValue} />}
       onAddSubmit={() => {
-        dispatch(addNewWithdraw(value));
+        dispatch(addReason(value));
         setValue(emptyValue);
-        dispatch(listAllWithdraws());
+        dispatch(listReasons());
       }}
       modelTitle={"addn new reason"}
     />

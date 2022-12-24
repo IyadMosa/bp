@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { TableScreen } from "@iyadmosa/react-library/build";
 import { useDispatch, useSelector } from "react-redux";
 import { PersonForm } from "../person/PersonForm";
-import { addNewWithdraw, listAllWithdraws } from "../../actions/WithdrawAction";
+import { addPerson, listPersons } from "../../actions/PersonAction";
 
 export const Persons = () => {
   const columns = [
@@ -20,7 +20,7 @@ export const Persons = () => {
     },
   ];
 
-  const data = useSelector((state) => state.withdraw.withdraws);
+  const data = useSelector((state) => state.person.persons);
   const dispatch = useDispatch();
   const emptyValue = {
     name: "",
@@ -28,7 +28,7 @@ export const Persons = () => {
   };
   const [value, setValue] = useState(emptyValue);
   useEffect(() => {
-    dispatch(listAllWithdraws());
+    dispatch(listPersons());
   }, []);
   return (
     <TableScreen
@@ -38,9 +38,9 @@ export const Persons = () => {
       columns={columns}
       addForm={<PersonForm value={value} onChange={setValue} />}
       onAddSubmit={() => {
-        dispatch(addNewWithdraw(value));
+        dispatch(addPerson(value));
         setValue(emptyValue);
-        dispatch(listAllWithdraws());
+        dispatch(listPersons());
       }}
       modelTitle={"addn new person"}
     />
