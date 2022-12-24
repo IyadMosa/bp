@@ -32,4 +32,12 @@ public class WithdrawService {
     public List<Withdraw> findAll() {
         return Lists.newArrayList(repository.findAll());
     }
+
+    public void delete(Withdraw withdraw) {
+        repository.delete(withdraw);
+    }
+
+    public void deleteAll() {
+        repository.deleteAll();
+    }
 }

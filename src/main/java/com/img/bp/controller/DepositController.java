@@ -31,4 +31,16 @@ public class DepositController {
     public ResponseEntity<List<Deposit>> getAll() {
         return new ResponseEntity<>(service.findAll(), HttpStatus.FOUND);
     }
+
+    @DeleteMapping
+    public ResponseEntity<Void> delete(@RequestBody Deposit deposit) {
+        service.delete(deposit);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/all")
+    public ResponseEntity<Void> deleteAll() {
+        service.deleteAll();
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

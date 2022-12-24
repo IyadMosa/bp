@@ -32,4 +32,12 @@ public class DepositService {
     public List<Deposit> findAll() {
         return Lists.newArrayList(repository.findAll());
     }
+
+    public void delete(Deposit deposit) {
+        repository.delete(deposit);
+    }
+
+    public void deleteAll() {
+        repository.deleteAll();
+    }
 }
