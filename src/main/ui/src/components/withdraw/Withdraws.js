@@ -3,6 +3,8 @@ import { TableScreen } from "@iyadmosa/react-library/build";
 import { useDispatch, useSelector } from "react-redux";
 import { WithdrawForm } from "./WithdrawForm";
 import { addNewWithdraw, listAllWithdraws } from "../../actions/WithdrawAction";
+import { listPersons } from "../../actions/PersonAction";
+import { listReasons } from "../../actions/ReasonAction";
 
 export const Withdraws = () => {
   const depositsColumns = [
@@ -28,17 +30,29 @@ export const Withdraws = () => {
     },
   ];
 
+  useEffect(() => {
+    dispatch(listPersons());
+  }, []);
   const data = useSelector((state) => state.withdraw.withdraws);
+  const persons = useSelector((state) => state.person.persons).map((obj) => {
+    return obj.name;
+  });
+  const reasons = useSelector((state) => state.reason.reasons).map((obj) => {
+    return obj.name;
+  });
+
   const dispatch = useDispatch();
   const emptyValue = {
     person: "",
-    amount: 1,
+    amount: 0,
     reason: "",
     date: "",
   };
   const [value, setValue] = useState(emptyValue);
   useEffect(() => {
     dispatch(listAllWithdraws());
+    dispatch(listPersons());
+    dispatch(listReasons());
   }, []);
   return (
     <TableScreen
@@ -50,8 +64,8 @@ export const Withdraws = () => {
         <WithdrawForm
           value={value}
           onChange={setValue}
-          persons={[]}
-          reasons={[]}
+          persons={persons}
+          reasons={reasons}
         />
       }
       onAddSubmit={() => {
