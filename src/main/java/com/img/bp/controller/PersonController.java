@@ -23,8 +23,8 @@ public class PersonController {
 
 
     @PostMapping
-    public ResponseEntity<?> add(@RequestBody Person deposit) throws Exception {
-        service.add(deposit);
+    public ResponseEntity<?> add(@RequestBody Person person) throws Exception {
+        service.add(person);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
