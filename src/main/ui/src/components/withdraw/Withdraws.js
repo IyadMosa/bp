@@ -40,7 +40,6 @@ export const Withdraws = () => {
   useEffect(() => {
     dispatch(listAllWithdraws());
   }, []);
-  console.log(value);
   return (
     <TableScreen
       title={"Withdraws"}
