@@ -27,3 +27,23 @@ export const listAllDeposits = () => (dispatch, getState) =>
     .catch((error) => {
       return Promise.reject(error);
     });
+
+export const deleteDeposit = (value) => (dispatch) =>
+  RestRequest(
+    "/api/deposit",
+    "DELETE",
+    value,
+    "Delete deposit success"
+  )(dispatch).catch((error) => {
+    return Promise.reject(error);
+  });
+
+export const deleteDeposits = () => (dispatch, getState) =>
+  RestRequest(
+    "/api/deposit/all",
+    "DELETE",
+    null,
+    "Delete deposits success"
+  )(dispatch, getState).catch((error) => {
+    return Promise.reject(error);
+  });

@@ -16,7 +16,7 @@ export const listAllWithdraws = () => (dispatch, getState) =>
     "/api/withdraw/",
     "GET",
     null,
-    "get all withdraws success"
+    "get withdraws success"
   )(dispatch, getState)
     .then((data) => {
       dispatch({
@@ -27,3 +27,23 @@ export const listAllWithdraws = () => (dispatch, getState) =>
     .catch((error) => {
       return Promise.reject(error);
     });
+
+export const deleteWithdraw = (value) => (dispatch) =>
+  RestRequest(
+    "/api/withdraw",
+    "DELETE",
+    value,
+    "Delete withdraw success"
+  )(dispatch).catch((error) => {
+    return Promise.reject(error);
+  });
+
+export const deleteWithdraws = () => (dispatch, getState) =>
+  RestRequest(
+    "/api/withdraw/all",
+    "DELETE",
+    null,
+    "Delete withdraws success"
+  )(dispatch, getState).catch((error) => {
+    return Promise.reject(error);
+  });
