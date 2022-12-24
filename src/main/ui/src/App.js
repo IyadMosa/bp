@@ -7,7 +7,7 @@ import { Deposits } from "./components/deposit/Deposits";
 import { Withdraws } from "./components/withdraw/Withdraws";
 import React from "react";
 import { Reasons } from "./components/reason/Reasons";
-import { Person } from "@material-ui/icons";
+import { Persons } from "./components/person/Persons";
 function App() {
   const brand = { name: "NavbarScroller", to: "/main" };
   const links = [
@@ -29,7 +29,7 @@ function App() {
     {
       name: "Persons",
       to: "/persons",
-      component: <Person />,
+      component: <Persons />,
     },
     {
       name: "Reasons",
