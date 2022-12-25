@@ -13,7 +13,17 @@ export const WithdrawForm = ({
   persons = [],
   reasons = [],
 }) => {
-  const { amount, person, reason } = value;
+  const { isAddToDeposit, withdraw } = value;
+  const { amount, person, reason } = withdraw;
+  const setWithdraw = (key, nv) => {
+    onChange({
+      ...value,
+      withdraw: {
+        ...value?.withdraw,
+        [key]: nv,
+      },
+    });
+  };
   const personsOptions = useMemo(
     () => [...persons.map((name) => ({ value: name, label: name }))],
     [persons]
@@ -30,26 +40,26 @@ export const WithdrawForm = ({
           title={"Person"}
           value={{ value: person, label: person }}
           options={personsOptions}
-          onChange={(nv) => onChange({ ...value, person: nv.value })}
+          onChange={(nv) => setWithdraw("person", nv.value)}
           width={300}
         />
         <Dropdown
           title={"Reason"}
           value={{ value: reason, label: reason }}
           options={reasonsOptions}
-          onChange={(nv) => onChange({ ...value, reason: nv.value })}
+          onChange={(nv) => setWithdraw("reason", nv.value)}
           width={300}
         />
       </InnerContainer>
       <TextFieldRange
         title={"Amount"}
         value={amount}
-        onChange={(nv) => onChange({ ...value, amount: nv })}
+        onChange={(nv) => setWithdraw("amount", nv)}
         disabled={disabled}
         width={250}
       />
       <DatePickerCustom
-        onChange={(nv) => onChange({ ...value, date: nv })}
+        onChange={(nv) => setWithdraw("date", nv)}
         width={100}
       />
     </Container>

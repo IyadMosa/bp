@@ -43,10 +43,13 @@ export const Withdraws = () => {
 
   const dispatch = useDispatch();
   const emptyValue = {
-    person: "",
-    amount: 0,
-    reason: "",
-    date: "",
+    isAddToDeposit: false,
+    withdraw: {
+      person: "",
+      amount: 0,
+      reason: "",
+      date: "",
+    },
   };
   const [value, setValue] = useState(emptyValue);
   useEffect(() => {
