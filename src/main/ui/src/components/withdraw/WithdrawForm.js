@@ -1,10 +1,7 @@
-import React, { useMemo } from "react";
-import { Container, InnerContainer } from "./Withdraw.style";
-import {
-  DatePickerCustom,
-  Dropdown,
-  TextFieldRange,
-} from "@iyadmosa/react-library";
+import React from "react";
+import { Container } from "./Withdraw.style";
+import { CheckboxLabeled } from "@iyadmosa/react-library";
+import { CommonForm } from "../common/CommonForm";
 
 export const WithdrawForm = ({
   disabled = false,
@@ -13,54 +10,29 @@ export const WithdrawForm = ({
   persons = [],
   reasons = [],
 }) => {
-  const { isAddToDeposit, withdraw } = value;
-  const { amount, person, reason } = withdraw;
-  const setWithdraw = (key, nv) => {
+  const { addToDeposit } = value;
+  const setValue = (key, nv) => {
     onChange({
       ...value,
-      withdraw: {
-        ...value?.withdraw,
-        [key]: nv,
-      },
+      [key]: nv,
     });
   };
-  const personsOptions = useMemo(
-    () => [...persons.map((name) => ({ value: name, label: name }))],
-    [persons]
-  );
 
-  const reasonsOptions = useMemo(
-    () => [...reasons.map((name) => ({ value: name, label: name }))],
-    [reasons]
-  );
   return (
     <Container>
-      <InnerContainer>
-        <Dropdown
-          title={"Person"}
-          value={{ value: person, label: person }}
-          options={personsOptions}
-          onChange={(nv) => setWithdraw("person", nv.value)}
-          width={300}
-        />
-        <Dropdown
-          title={"Reason"}
-          value={{ value: reason, label: reason }}
-          options={reasonsOptions}
-          onChange={(nv) => setWithdraw("reason", nv.value)}
-          width={300}
-        />
-      </InnerContainer>
-      <TextFieldRange
-        title={"Amount"}
-        value={amount}
-        onChange={(nv) => setWithdraw("amount", nv)}
+      <CheckboxLabeled
+        checked={addToDeposit}
+        onChange={() => setValue("addToDeposit", !addToDeposit)}
+        label={"Add as Deposit"}
         disabled={disabled}
-        width={250}
       />
-      <DatePickerCustom
-        onChange={(nv) => setWithdraw("date", nv)}
-        width={100}
+
+      <CommonForm
+        value={value}
+        onChange={onChange}
+        persons={persons}
+        reasons={reasons}
+        disabled={disabled}
       />
     </Container>
   );

@@ -43,13 +43,11 @@ export const Withdraws = () => {
 
   const dispatch = useDispatch();
   const emptyValue = {
-    isAddToDeposit: false,
-    withdraw: {
-      person: "",
-      amount: 0,
-      reason: "",
-      date: "",
-    },
+    addToDeposit: false,
+    person: "",
+    amount: 0,
+    reason: "",
+    date: new Date(),
   };
   const [value, setValue] = useState(emptyValue);
   useEffect(() => {
@@ -74,8 +72,8 @@ export const Withdraws = () => {
       onAddSubmit={() => {
         dispatch(addNewWithdraw(value));
         setValue(emptyValue);
-        dispatch(listAllWithdraws());
       }}
+      onInit={() => dispatch(listAllWithdraws())}
       modelTitle={"addn new withdraw"}
     />
   );
