@@ -7,10 +7,14 @@ import com.img.bp.service.DepositService;
 import com.img.bp.service.WithdrawService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import static com.img.bp.helper.Constants.DATE_STANDER_FORMAT;
 
 @RestController
 @RequestMapping("/api/withdraw")
@@ -26,16 +30,21 @@ public class WithdrawController {
 
     @PostMapping
     public ResponseEntity<?> add(@RequestBody withdrawRequest request) throws Exception {
-        if (request.getWithdraw() == null) {
-            throw new Exception("Withdraw should be not empty");
+        if (request == null) {
+            throw new Exception("Withdraw request should be not empty");
         }
-        Withdraw withdraw = request.getWithdraw();
-        withdraw.setDate(new Date());
+        Date date = new Date();
+        if (StringUtils.hasLength(request.getDate())) {
+            SimpleDateFormat formatter = new SimpleDateFormat(DATE_STANDER_FORMAT);
+            date = formatter.parse(request.getDate());
+            date.setHours(4);
+        }
+        Withdraw withdraw = new Withdraw(request.getId(), request.getAmount(), request.getPerson(), request.getReason(), date);
         if (request.isAddToDeposit()) {
             Deposit deposit = new Deposit(null, withdraw.getAmount(), withdraw.getPerson(), withdraw.getDate());
             depositService.add(deposit);
         }
-        service.add(request.getWithdraw());
+        service.add(withdraw);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

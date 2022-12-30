@@ -1,6 +1,7 @@
 package com.img.bp.document;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.DateFormat;
@@ -15,6 +16,7 @@ import static com.img.bp.helper.Constants.WITHDRAW_INDEX_NAME;
 
 @Data
 @Document(indexName = WITHDRAW_INDEX_NAME)
+@AllArgsConstructor
 public class Withdraw {
 
     @Id
@@ -31,6 +33,6 @@ public class Withdraw {
     private String reason;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATE_STANDER_FORMAT)
-    @Field(type = FieldType.Date, format = DateFormat.epoch_millis)
+    @Field(type = FieldType.Date)
     private Date date;
 }

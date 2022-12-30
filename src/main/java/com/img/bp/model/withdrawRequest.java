@@ -1,10 +1,13 @@
 package com.img.bp.model;
 
-import com.img.bp.document.Withdraw;
 import lombok.Data;
 
 @Data
 public class withdrawRequest {
-    private boolean isAddToDeposit;
-    private Withdraw withdraw;
+    private boolean addToDeposit;
+    private String id;
+    private Long amount;
+    private String person;
+    private String reason;
+    private String date;
 }
