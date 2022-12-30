@@ -16,7 +16,7 @@ export const Deposits = () => {
     },
     {
       Header: "Deposit By",
-      accessor: "depositBy",
+      accessor: "person",
     },
     {
       Header: "Date",
@@ -43,9 +43,9 @@ export const Deposits = () => {
       onAddSubmit={() => {
         dispatch(addNewDeposit(depositValue));
         setDepositValue(emptyDeposit);
-        dispatch(listAllDeposits());
       }}
       modelTitle={"addn new deposit"}
+      onInit={() => dispatch(listAllDeposits())}
     />
   );
 };

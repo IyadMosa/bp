@@ -35,9 +35,9 @@ export const Reasons = () => {
       onAddSubmit={() => {
         dispatch(addReason(value));
         setValue(emptyValue);
-        dispatch(listReasons());
       }}
       modelTitle={"addn new reason"}
+      onInit={() => dispatch(listReasons())}
     />
   );
 };

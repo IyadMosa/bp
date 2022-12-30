@@ -40,9 +40,9 @@ export const Persons = () => {
       onAddSubmit={() => {
         dispatch(addPerson(value));
         setValue(emptyValue);
-        dispatch(listPersons());
       }}
       modelTitle={"addn new person"}
+      onInit={() => dispatch(listPersons())}
     />
   );
 };
