@@ -27,8 +27,11 @@ export const Deposits = () => {
   const deposits = useSelector((state) => state.deposit.deposits);
   const dispatch = useDispatch();
   const emptyDeposit = {
-    depositBy: "",
-    amount: 0,
+    deposit: {
+      person: "",
+      amount: 0,
+      date: new Date(),
+    },
   };
   const [depositValue, setDepositValue] = useState(emptyDeposit);
   useEffect(() => {

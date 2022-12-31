@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { TableScreen } from "@iyadmosa/react-library/build";
 import { useDispatch, useSelector } from "react-redux";
 import { WithdrawForm } from "./WithdrawForm";
 import { addNewWithdraw, listAllWithdraws } from "../../actions/WithdrawAction";
-import { listPersons } from "../../actions/PersonAction";
-import { listReasons } from "../../actions/ReasonAction";
+import { listAllDeposits } from "../../actions/DepositAction";
 
 export const Withdraws = () => {
   const depositsColumns = [
@@ -30,45 +29,29 @@ export const Withdraws = () => {
     },
   ];
 
-  useEffect(() => {
-    dispatch(listPersons());
-  }, []);
   const data = useSelector((state) => state.withdraw.withdraws);
-  const persons = useSelector((state) => state.person.persons).map((obj) => {
-    return obj.name;
-  });
-  const reasons = useSelector((state) => state.reason.reasons).map((obj) => {
-    return obj.name;
-  });
 
   const dispatch = useDispatch();
-  const emptyValue = {
-    addToDeposit: false,
-    person: "",
-    amount: 0,
-    reason: "",
-    date: new Date(),
-  };
-  const [value, setValue] = useState(emptyValue);
   useEffect(() => {
     dispatch(listAllWithdraws());
-    dispatch(listPersons());
-    dispatch(listReasons());
   }, []);
+  const emptyValue = {
+    addToDeposit: false,
+    withdraw: {
+      person: "",
+      amount: 0,
+      reason: "",
+      date: new Date(),
+    },
+  };
+  const [value, setValue] = useState(emptyValue);
   return (
     <TableScreen
       title={"Withdraws"}
       minWidth={800}
       data={data}
       columns={depositsColumns}
-      addForm={
-        <WithdrawForm
-          value={value}
-          onChange={setValue}
-          persons={persons}
-          reasons={reasons}
-        />
-      }
+      addForm={<WithdrawForm value={value} onChange={setValue} />}
       onAddSubmit={() => {
         dispatch(addNewWithdraw(value));
         setValue(emptyValue);

@@ -12,8 +12,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.util.Date;
 
-import static com.img.bp.helper.Constants.DATE_STANDER_FORMAT;
-import static com.img.bp.helper.Constants.DEPOSIT_INDEX_NAME;
+import static com.img.bp.helper.Constants.*;
 
 @Data
 @Document(indexName = DEPOSIT_INDEX_NAME)
@@ -31,7 +30,7 @@ public class Deposit {
     @Field(type = FieldType.Text)
     private String person;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATE_STANDER_FORMAT)
-    @Field(type = FieldType.Date, format = DateFormat.epoch_millis)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATE_STANDER_FORMAT_2)
+    @Field(type = FieldType.Date)
     private Date date;
 }

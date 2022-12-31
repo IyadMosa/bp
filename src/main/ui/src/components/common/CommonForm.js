@@ -1,34 +1,34 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Container, InnerContainer } from "./Style";
 import {
   DatePickerCustom,
   Dropdown,
   TextFieldRange,
 } from "@iyadmosa/react-library";
+import { listPersons } from "../../actions/PersonAction";
+import { useDispatch, useSelector } from "react-redux";
 
-export const CommonForm = ({
-  disabled = false,
-  value,
-  onChange = () => 0,
-  persons = [],
-  reasons = [],
-}) => {
-  const { amount, person, reason } = value;
+export const CommonForm = ({ disabled = false, value, onChange = () => 0 }) => {
+  const { amount, person, date } = value;
   const setValue = (key, nv) => {
     onChange({
       ...value,
       [key]: nv,
     });
   };
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(listPersons());
+  }, []);
+  const persons = useSelector((state) => state.person.persons).map((obj) => {
+    return obj.name;
+  });
+
   const personsOptions = useMemo(
     () => [...persons.map((name) => ({ value: name, label: name }))],
     [persons]
   );
 
-  const reasonsOptions = useMemo(
-    () => [...reasons.map((name) => ({ value: name, label: name }))],
-    [reasons]
-  );
   return (
     <Container>
       <InnerContainer>
@@ -40,16 +40,6 @@ export const CommonForm = ({
           width={300}
           disabled={disabled}
         />
-        <Dropdown
-          title={"Reason"}
-          value={{ value: reason, label: reason }}
-          options={reasonsOptions}
-          onChange={(nv) => setValue("reason", nv.value)}
-          width={300}
-          disabled={disabled}
-        />
-      </InnerContainer>
-      <InnerContainer>
         <TextFieldRange
           title={"Amount"}
           value={amount}
@@ -57,10 +47,13 @@ export const CommonForm = ({
           disabled={disabled}
           width={250}
         />
+      </InnerContainer>
+      <InnerContainer>
         <DatePickerCustom
           onChange={(nv) => setValue("date", nv)}
           width={100}
           disabled={disabled}
+          date={date}
         />
       </InnerContainer>
     </Container>

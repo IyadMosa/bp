@@ -10,4 +10,5 @@ public final class Constants {
     public static final String ES_SETTINGS_PATH = "static/es-settings.json";
 
     public static final String DATE_STANDER_FORMAT = "dd-MM-yyyy";
+    public static final String DATE_STANDER_FORMAT_2 = "yyyy-MM-dd";
 }
