@@ -11,4 +11,7 @@ public final class Constants {
 
     public static final String DATE_STANDER_FORMAT = "dd-MM-yyyy";
     public static final String DATE_STANDER_FORMAT_2 = "yyyy-MM-dd";
+
+    public static final String VERSION = "2.0.0";
+
 }
