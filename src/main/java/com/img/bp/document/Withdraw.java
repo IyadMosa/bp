@@ -12,8 +12,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.util.Date;
 
-import static com.img.bp.helper.Constants.DATE_STANDER_FORMAT;
-import static com.img.bp.helper.Constants.WITHDRAW_INDEX_NAME;
+import static com.img.bp.helper.Constants.*;
 
 @Data
 @Document(indexName = WITHDRAW_INDEX_NAME)
@@ -34,7 +33,7 @@ public class Withdraw {
     @Field(type = FieldType.Text)
     private String reason;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATE_STANDER_FORMAT)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATE_STANDER_FORMAT_2)
     @Field(type = FieldType.Date)
     private Date date;
 }

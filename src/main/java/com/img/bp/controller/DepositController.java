@@ -24,12 +24,6 @@ public class DepositController {
     @PostMapping
     public ResponseEntity<?> add(@RequestBody DepositRequest request) throws Exception {
         Deposit deposit = request.getDeposit();
-        Date date = new Date();
-        if (deposit.getDate() != null) {
-            date = deposit.getDate();
-            date.setHours(4);
-        }
-        deposit.setDate(date);
         service.add(deposit);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

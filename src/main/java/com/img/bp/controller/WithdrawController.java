@@ -30,12 +30,6 @@ public class WithdrawController {
             throw new Exception("Withdraw request should be not empty");
         }
         Withdraw withdraw = request.getWithdraw();
-        Date date = new Date();
-        if (withdraw.getDate() != null) {
-            date = withdraw.getDate();
-            date.setHours(12);
-        }
-        withdraw.setDate(date);
         if (request.isAddToDeposit()) {
             Deposit deposit = new Deposit(null, withdraw.getAmount(), withdraw.getPerson(), withdraw.getDate());
             depositService.add(deposit);
