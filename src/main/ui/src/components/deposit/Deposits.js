@@ -35,10 +35,12 @@ export const Deposits = () => {
     deposit: {
       person: "",
       amount: 0,
-      date: new Date(),
+      date: "",
     },
   };
-  const [depositValue, setDepositValue] = useState(emptyDeposit);
+  const [value, setValue] = useState(emptyDeposit);
+  const disabledSubmit =
+    !value.deposit.person || !value.deposit.amount || !value.deposit.date;
   useEffect(() => {
     dispatch(listAllDeposits());
   }, []);
@@ -47,13 +49,14 @@ export const Deposits = () => {
       title={"Deposits"}
       data={deposits}
       columns={depositsColumns}
-      addForm={<DepositForm value={depositValue} onChange={setDepositValue} />}
+      addForm={<DepositForm value={value} onChange={setValue} />}
       onAddSubmit={() => {
-        dispatch(addNewDeposit(depositValue));
-        setDepositValue(emptyDeposit);
+        dispatch(addNewDeposit(value));
+        setValue(emptyDeposit);
       }}
       modelTitle={"addn new deposit"}
       onInit={() => dispatch(listAllDeposits())}
+      disabledSubmit={disabledSubmit}
     />
   );
 };

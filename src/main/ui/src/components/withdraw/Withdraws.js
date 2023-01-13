@@ -46,10 +46,15 @@ export const Withdraws = () => {
       person: "",
       amount: 0,
       reason: "",
-      date: new Date(),
+      date: "",
     },
   };
   const [value, setValue] = useState(emptyValue);
+  const disabledSubmit =
+    !value.withdraw.amount ||
+    !value.withdraw.person ||
+    !value.withdraw.reason ||
+    !value.withdraw.date;
   return (
     <TableScreen
       title={"Withdraws"}
@@ -63,6 +68,7 @@ export const Withdraws = () => {
       }}
       onInit={() => dispatch(listAllWithdraws())}
       modelTitle={"addn new withdraw"}
+      disabledSubmit={disabledSubmit}
     />
   );
 };
