@@ -40,4 +40,8 @@ public class DepositService {
     public void deleteAll() {
         repository.deleteAll();
     }
+
+    public void deleteById(String id) {
+        repository.deleteById(id);
+    }
 }

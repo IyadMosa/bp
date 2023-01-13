@@ -40,4 +40,7 @@ public class WithdrawService {
     public void deleteAll() {
         repository.deleteAll();
     }
+    public void deleteById(String id) {
+        repository.deleteById(id);
+    }
 }
