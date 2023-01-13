@@ -21,6 +21,11 @@ export const Deposits = () => {
     {
       Header: "Date",
       accessor: "date",
+      sortMethod: (a, b) => {
+        let date1 = a.split("/").reverse().join("");
+        let date2 = b.split("/").reverse().join("");
+        return date1.localeCompare(date2);
+      },
     },
   ];
 
