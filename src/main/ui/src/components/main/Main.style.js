@@ -3,9 +3,18 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 60px;
-  padding: 75px;
+  gap: 20px;
+  padding-left: 30px;
   background: white;
+  width: 90%;
+  height: 90%;
+`;
+
+export const ChartRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  width: 100%;
 `;
 
 export const TablesWrapper = styled.div`

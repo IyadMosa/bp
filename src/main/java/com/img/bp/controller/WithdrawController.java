@@ -2,6 +2,7 @@ package com.img.bp.controller;
 
 import com.img.bp.document.Deposit;
 import com.img.bp.document.Withdraw;
+import com.img.bp.model.Point;
 import com.img.bp.model.WithdrawRequest;
 import com.img.bp.service.DepositService;
 import com.img.bp.service.WithdrawService;
@@ -9,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -43,6 +43,15 @@ public class WithdrawController {
         return new ResponseEntity<>(service.findAll(), HttpStatus.FOUND);
     }
 
+    @GetMapping("/points-by-reason")
+    public ResponseEntity<List<Point>> getAllPointsByReason() {
+        return new ResponseEntity<>(service.getAllPointsByReason(), HttpStatus.FOUND);
+    }
+
+    @GetMapping("/point")
+    public ResponseEntity<Point> getDepositPoint() {
+        return new ResponseEntity<>(service.getWithdrawPoint(), HttpStatus.FOUND);
+    }
     @DeleteMapping
     public ResponseEntity<Void> delete(@RequestBody Withdraw withdraw) {
         service.delete(withdraw);

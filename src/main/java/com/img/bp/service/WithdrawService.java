@@ -3,12 +3,16 @@ package com.img.bp.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
 import com.img.bp.document.Withdraw;
+import com.img.bp.model.Point;
 import com.img.bp.repository.WithdrawRepository;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 public class WithdrawService {
@@ -42,5 +46,28 @@ public class WithdrawService {
     }
     public void deleteById(String id) {
         repository.deleteById(id);
+    }
+
+    public List<Point> getAllPointsByReason() {
+        HashMap<String, Point> map = new HashMap<>();
+        findAll().forEach(withdraw -> {
+            String key = withdraw.getReason();
+            Long value = withdraw.getAmount();
+            if(map.get(key) != null){
+                long total = map.get(key).getValue() + value;
+                map.put(key, new Point(key,total));
+            }
+            else {
+                map.put(key, new Point(key, value));
+            }
+        });
+        return new ArrayList<>(map.values());
+    }
+    public Point getWithdrawPoint() {
+        AtomicLong total = new AtomicLong();
+        findAll().forEach(deposit -> {
+            total.addAndGet(deposit.getAmount());
+        });
+        return new Point("deposit", total.get());
     }
 }

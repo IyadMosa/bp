@@ -1,10 +1,22 @@
 import React from "react";
-import { Container, TablesWrapper, TitleWrapper } from "./Main.style";
+import { ChartRow, Container } from "./Main.style";
+import { WithdrawChart } from "../withdraw/WithdrawChart";
+import { DepositDateChart, DepositPersonChart } from "../deposit/DepositCharts";
+import { DepositWithdrawChart } from "./Charts";
 
 export const Main = () => {
   return (
-    <Container className={"modal"}>
-      <TitleWrapper>Main Page</TitleWrapper>
+    <Container>
+      <ChartRow>
+        <DepositWithdrawChart />
+        <WithdrawChart />
+      </ChartRow>
+      <ChartRow>
+        <DepositPersonChart />
+      </ChartRow>
+      <ChartRow>
+        <DepositDateChart />
+      </ChartRow>
     </Container>
   );
 };

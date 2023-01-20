@@ -14,7 +14,7 @@ function App() {
     {
       name: "Main",
       to: "/main",
-      component: <EmptyScreen title={"Main Page"} page={<Main />} />,
+      component: <EmptyScreen title={"Dashboard"} page={<Main />} />,
     },
     {
       name: "Deposits",
