@@ -13,7 +13,12 @@ export const DepositWithdrawChart = () => {
   }, []);
   const depositPoint = useSelector((state) => state.deposit.depositPoint);
   const withdrawPoint = useSelector((state) => state.withdraw.withdrawPoint);
-  const points = [depositPoint, withdrawPoint];
+  const diff = depositPoint.value - withdrawPoint.value;
+  const points = [
+    depositPoint,
+    withdrawPoint,
+    { label: "Differance", value: diff },
+  ];
   return (
     <ColumnChart
       width="100%"
