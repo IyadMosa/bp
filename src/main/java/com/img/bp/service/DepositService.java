@@ -71,7 +71,7 @@ public class DepositService {
         findAll().forEach(deposit -> {
             total.addAndGet(deposit.getAmount());
         });
-        return new Point("deposit", total.get());
+        return new Point("Deposit", total.get());
     }
 
     public List<DatePoint> getAllPointsByDate() {

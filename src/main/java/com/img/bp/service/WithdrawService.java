@@ -68,6 +68,6 @@ public class WithdrawService {
         findAll().forEach(deposit -> {
             total.addAndGet(deposit.getAmount());
         });
-        return new Point("deposit", total.get());
+        return new Point("Withdraw", total.get());
     }
 }
