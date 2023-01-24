@@ -43,15 +43,16 @@ public class WithdrawController {
         return new ResponseEntity<>(service.findAll(), HttpStatus.FOUND);
     }
 
-    @GetMapping("/points-by-reason")
-    public ResponseEntity<List<Point>> getAllPointsByReason() {
-        return new ResponseEntity<>(service.getAllPointsByReason(), HttpStatus.FOUND);
+    @GetMapping("/points-by-reason/{majorOnly}")
+    public ResponseEntity<List<Point>> getAllPointsByReason(@PathVariable boolean majorOnly) {
+        return new ResponseEntity<>(service.getAllPointsByReason(majorOnly), HttpStatus.FOUND);
     }
 
     @GetMapping("/point")
     public ResponseEntity<Point> getDepositPoint() {
         return new ResponseEntity<>(service.getWithdrawPoint(), HttpStatus.FOUND);
     }
+
     @DeleteMapping
     public ResponseEntity<Void> delete(@RequestBody Withdraw withdraw) {
         service.delete(withdraw);
@@ -63,6 +64,7 @@ public class WithdrawController {
         service.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
     @DeleteMapping("/all")
     public ResponseEntity<Void> deleteAll() {
         service.deleteAll();

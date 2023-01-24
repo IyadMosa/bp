@@ -1,16 +1,21 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { Container } from "./Reason.style";
 import { TextField } from "@iyadmosa/react-library";
 
 export const ReasonForm = ({ disabled = false, value, onChange = () => 0 }) => {
-  const { name, phone } = value;
+  const { major, minor } = value;
 
   return (
     <Container>
       <TextField
-        title={"Name"}
-        value={name}
-        onChange={(nv) => onChange({ ...value, name: nv })}
+        title={"Major"}
+        value={major}
+        onChange={(nv) => onChange({ ...value, major: nv })}
+      />
+      <TextField
+        title={"Minor"}
+        value={minor}
+        onChange={(nv) => onChange({ ...value, minor: nv })}
       />
     </Container>
   );

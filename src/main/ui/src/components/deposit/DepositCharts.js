@@ -13,14 +13,7 @@ export const DepositPersonChart = () => {
   }, []);
   const points = useSelector((state) => state.deposit.personPoints);
 
-  return (
-    <ColumnChart
-      width="100%"
-      height="400px"
-      points={points}
-      title={"Deposit Per Person"}
-    />
-  );
+  return <ColumnChart points={points} title={"Deposit Per Person"} />;
 };
 
 export const DepositDateChart = () => {

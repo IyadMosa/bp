@@ -11,20 +11,27 @@ export const Reasons = () => {
       accessor: "id",
     },
     {
-      Header: "Name",
-      accessor: "name",
+      Header: "Major",
+      accessor: "major",
+    },
+    {
+      Header: "Minor",
+      accessor: "minor",
     },
   ];
 
   const data = useSelector((state) => state.reason.reasons);
   const dispatch = useDispatch();
   const emptyValue = {
-    name: "",
+    major: "",
+    minor: "",
   };
   const [value, setValue] = useState(emptyValue);
   useEffect(() => {
     dispatch(listReasons());
   }, []);
+  const disabledSubmit = !value.major || !value.minor;
+
   return (
     <TableScreen
       title={"Reasons"}
@@ -38,6 +45,7 @@ export const Reasons = () => {
       }}
       modelTitle={"addn new reason"}
       onInit={() => dispatch(listReasons())}
+      disabledSubmit={disabledSubmit}
     />
   );
 };

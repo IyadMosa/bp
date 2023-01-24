@@ -1,6 +1,9 @@
 import React from "react";
 import { ChartRow, Container } from "./Main.style";
-import { WithdrawChart } from "../withdraw/WithdrawChart";
+import {
+  DetailedWithdrawChart,
+  WithdrawChart,
+} from "../withdraw/WithdrawChart";
 import { DepositDateChart, DepositPersonChart } from "../deposit/DepositCharts";
 import { DepositWithdrawChart } from "./Charts";
 
@@ -16,6 +19,9 @@ export const Main = () => {
       </ChartRow>
       <ChartRow>
         <DepositDateChart />
+      </ChartRow>
+      <ChartRow>
+        <DetailedWithdrawChart />
       </ChartRow>
     </Container>
   );

@@ -22,11 +22,13 @@ public class WithdrawService {
     private final WithdrawRepository repository;
 
     private final RestHighLevelClient client;
+    private final ReasonService reasonService;
 
     @Autowired
-    public WithdrawService(WithdrawRepository repository, RestHighLevelClient client) {
+    public WithdrawService(WithdrawRepository repository, RestHighLevelClient client, ReasonService reasonService) {
         this.repository = repository;
         this.client = client;
+        this.reasonService = reasonService;
     }
 
     public void add(Withdraw withdraw) throws Exception {
@@ -44,25 +46,29 @@ public class WithdrawService {
     public void deleteAll() {
         repository.deleteAll();
     }
+
     public void deleteById(String id) {
         repository.deleteById(id);
     }
 
-    public List<Point> getAllPointsByReason() {
+    public List<Point> getAllPointsByReason(boolean majorOnly) {
         HashMap<String, Point> map = new HashMap<>();
         findAll().forEach(withdraw -> {
             String key = withdraw.getReason();
-            Long value = withdraw.getAmount();
-            if(map.get(key) != null){
-                long total = map.get(key).getValue() + value;
-                map.put(key, new Point(key,total));
+            if (majorOnly) {
+                key =reasonService.getMajorByMinor(key);
             }
-            else {
+            Long value = withdraw.getAmount();
+            if (map.get(key) != null) {
+                long total = map.get(key).getValue() + value;
+                map.put(key, new Point(key, total));
+            } else {
                 map.put(key, new Point(key, value));
             }
         });
         return new ArrayList<>(map.values());
     }
+
     public Point getWithdrawPoint() {
         AtomicLong total = new AtomicLong();
         findAll().forEach(deposit -> {

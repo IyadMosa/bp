@@ -2,6 +2,7 @@ import { RestRequest } from "./RestRequest";
 import {
   GET_ALL_WITHDRAWS,
   GET_ALL_WITHDRAWS_POINTS_BY_REASON,
+  GET_ALL_WITHDRAWS_POINTS_BY_REASON_MAJOR,
   GET_WITHDRAW_POINT,
 } from "./types";
 
@@ -32,9 +33,25 @@ export const listAllWithdraws = () => (dispatch, getState) =>
       return Promise.reject(error);
     });
 
+export const listPointsByReasonMajor = () => (dispatch, getState) =>
+  RestRequest(
+    "/api/withdraw/points-by-reason/true",
+    "GET",
+    null,
+    "get withdraws points success"
+  )(dispatch, getState)
+    .then((data) => {
+      dispatch({
+        type: GET_ALL_WITHDRAWS_POINTS_BY_REASON_MAJOR,
+        payload: data,
+      });
+    })
+    .catch((error) => {
+      return Promise.reject(error);
+    });
 export const listPointsByReason = () => (dispatch, getState) =>
   RestRequest(
-    "/api/withdraw/points-by-reason",
+    "/api/withdraw/points-by-reason/false",
     "GET",
     null,
     "get withdraws points success"

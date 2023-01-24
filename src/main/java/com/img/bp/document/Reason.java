@@ -22,4 +22,10 @@ public class Reason {
 
     @Field(type = FieldType.Text)
     private String name;
+
+    @Field(type = FieldType.Text)
+    private String major;
+
+    @Field(type = FieldType.Text)
+    private String minor;
 }

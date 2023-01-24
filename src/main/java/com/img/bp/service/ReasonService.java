@@ -24,6 +24,7 @@ public class ReasonService {
     }
 
     public void add(Reason reason) throws Exception {
+        reason.setName(reason.getMinor());
         repository.save(reason);
     }
 
@@ -37,5 +38,9 @@ public class ReasonService {
 
     public void deleteAll() {
         repository.deleteAll();
+    }
+
+    public String getMajorByMinor(String minor) {
+        return repository.findFirstByMinor(minor).getMajor();
     }
 }
