@@ -12,9 +12,12 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
+
+import static com.img.bp.helper.Constants.DEPOSIT_INDEX_NAME;
 
 @Service
 public class DepositService {
@@ -25,10 +28,13 @@ public class DepositService {
 
     private final RestHighLevelClient client;
 
+    private final SearchService searchService;
+
     @Autowired
-    public DepositService(DepositRepository repository, RestHighLevelClient client) {
+    public DepositService(DepositRepository repository, RestHighLevelClient client, SearchService searchService) {
         this.repository = repository;
         this.client = client;
+        this.searchService = searchService;
     }
 
     public void add(Deposit deposit) throws Exception {
@@ -51,9 +57,15 @@ public class DepositService {
         repository.deleteById(id);
     }
 
-    public List<Point> getAllPointsByPerson() {
+    public List<Point> getAllPointsByPerson(Date from, Date to) {
         HashMap<String, Point> map = new HashMap<>();
-        findAll().forEach(deposit -> {
+        List<Deposit> list = new ArrayList<>();
+        if (from == null) {
+            list = findAll();
+        } else {
+            list = searchService.searchByDateRange(Deposit.class, DEPOSIT_INDEX_NAME, "date", from, to);
+        }
+        list.forEach(deposit -> {
             String key = deposit.getPerson();
             Long value = deposit.getAmount();
             if (map.get(key) != null) {
