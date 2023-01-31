@@ -3,7 +3,6 @@ package com.img.bp.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
 import com.img.bp.document.Deposit;
-import com.img.bp.model.DatePoint;
 import com.img.bp.model.Point;
 import com.img.bp.repository.DepositRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,8 +92,8 @@ public class DepositService {
         return new Point("Deposit", total.get());
     }
 
-    public List<DatePoint> getAllPointsByDate(Date from, Date to) {
-        HashMap<String, DatePoint> map = new HashMap<>();
+    public List<Point> getAllPointsByDate(Date from, Date to) {
+        HashMap<String, Point> map = new HashMap<>();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/yyyy");
         List<Deposit> list = getDepositsList(from, to);
         list.forEach(deposit -> {
@@ -102,12 +101,12 @@ public class DepositService {
             Long value = deposit.getAmount();
             if (map.get(key) != null) {
                 long total = map.get(key).getValue() + value;
-                map.put(key, new DatePoint(key, total));
+                map.put(key, new Point(key, total));
             } else {
-                map.put(key, new DatePoint(key, value));
+                map.put(key, new Point(key, value));
             }
         });
-        List<DatePoint> points = new ArrayList<>(map.values());
+        List<Point> points = new ArrayList<>(map.values());
         return points;
     }
 

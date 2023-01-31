@@ -1,6 +1,5 @@
 package com.img.bp.controller.charts;
 
-import com.img.bp.model.DatePoint;
 import com.img.bp.model.DateRangeRequest;
 import com.img.bp.model.Point;
 import com.img.bp.service.DepositService;
@@ -32,7 +31,7 @@ public class DepositChartsController {
     }
 
     @GetMapping("/points-by-date")
-    public ResponseEntity<List<DatePoint>> getAllPointsByDate(@RequestBody DateRangeRequest dateRangeRequest) {
+    public ResponseEntity<List<Point>> getAllPointsByDate(@RequestBody DateRangeRequest dateRangeRequest) {
         return new ResponseEntity<>(service.getAllPointsByDate(dateRangeRequest.getFrom(), dateRangeRequest.getTo()), HttpStatus.FOUND);
     }
 }
