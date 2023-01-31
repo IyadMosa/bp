@@ -9,7 +9,11 @@ export const Container = styled.div`
   width: 90%;
   height: 90%;
 `;
-
+export const DateRangeRow = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
 export const ChartRow = styled.div`
   display: flex;
   flex-direction: row;

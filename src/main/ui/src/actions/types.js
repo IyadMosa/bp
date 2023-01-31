@@ -18,3 +18,6 @@ export const GET_ALL_PERSONS = "GET_ALL_PERSONS";
 
 //Reason
 export const GET_ALL_REASONS = "GET_ALL_REASONS";
+
+//Dashboard
+export const DASHBOARD_GET_ALL = "DASHBOARD_GET_ALL";
