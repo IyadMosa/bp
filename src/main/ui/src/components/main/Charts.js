@@ -5,11 +5,11 @@ import { getWithdrawPoint } from "../../actions/WithdrawAction";
 
 import { ColumnChart } from "@iyadmosa/react-library";
 
-export const DepositWithdrawChart = () => {
+export const DepositWithdrawChart = ({ from, to }) => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getDepositPoint());
-    dispatch(getWithdrawPoint());
+    dispatch(getDepositPoint(from, to));
+    dispatch(getWithdrawPoint(from, to));
   }, []);
   const depositPoint = useSelector((state) => state.deposit.depositPoint);
   const withdrawPoint = useSelector((state) => state.withdraw.withdrawPoint);

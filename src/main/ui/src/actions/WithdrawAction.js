@@ -33,55 +33,6 @@ export const listAllWithdraws = () => (dispatch, getState) =>
       return Promise.reject(error);
     });
 
-export const listPointsByReasonMajor = () => (dispatch, getState) =>
-  RestRequest(
-    "/api/withdraw/points-by-reason/true",
-    "GET",
-    null,
-    "get withdraws points success"
-  )(dispatch, getState)
-    .then((data) => {
-      dispatch({
-        type: GET_ALL_WITHDRAWS_POINTS_BY_REASON_MAJOR,
-        payload: data,
-      });
-    })
-    .catch((error) => {
-      return Promise.reject(error);
-    });
-export const listPointsByReason = () => (dispatch, getState) =>
-  RestRequest(
-    "/api/withdraw/points-by-reason/false",
-    "GET",
-    null,
-    "get withdraws points success"
-  )(dispatch, getState)
-    .then((data) => {
-      dispatch({
-        type: GET_ALL_WITHDRAWS_POINTS_BY_REASON,
-        payload: data,
-      });
-    })
-    .catch((error) => {
-      return Promise.reject(error);
-    });
-
-export const getWithdrawPoint = () => (dispatch, getState) =>
-  RestRequest(
-    "/api/withdraw/point",
-    "GET",
-    null,
-    "get withdraw point success"
-  )(dispatch, getState)
-    .then((data) => {
-      dispatch({
-        type: GET_WITHDRAW_POINT,
-        payload: data,
-      });
-    })
-    .catch((error) => {
-      return Promise.reject(error);
-    });
 export const deleteWithdraw = (value) => (dispatch) =>
   RestRequest(
     "/api/withdraw",
@@ -101,3 +52,54 @@ export const deleteWithdraws = () => (dispatch, getState) =>
   )(dispatch, getState).catch((error) => {
     return Promise.reject(error);
   });
+
+//Charts
+export const listPointsByReasonMajor = (from, to) => (dispatch, getState) =>
+  RestRequest(
+    "/api/charts/withdraw/points-by-reason/true",
+    "GET",
+    { from, to },
+    "get withdraws points success"
+  )(dispatch, getState)
+    .then((data) => {
+      dispatch({
+        type: GET_ALL_WITHDRAWS_POINTS_BY_REASON_MAJOR,
+        payload: data,
+      });
+    })
+    .catch((error) => {
+      return Promise.reject(error);
+    });
+export const listPointsByReason = (from, to) => (dispatch, getState) =>
+  RestRequest(
+    "/api/charts/withdraw/points-by-reason/false",
+    "GET",
+    { from, to },
+    "get withdraws points success"
+  )(dispatch, getState)
+    .then((data) => {
+      dispatch({
+        type: GET_ALL_WITHDRAWS_POINTS_BY_REASON,
+        payload: data,
+      });
+    })
+    .catch((error) => {
+      return Promise.reject(error);
+    });
+
+export const getWithdrawPoint = (from, to) => (dispatch, getState) =>
+  RestRequest(
+    "/api/charts/withdraw/point",
+    "GET",
+    { from, to },
+    "get withdraw point success"
+  )(dispatch, getState)
+    .then((data) => {
+      dispatch({
+        type: GET_WITHDRAW_POINT,
+        payload: data,
+      });
+    })
+    .catch((error) => {
+      return Promise.reject(error);
+    });

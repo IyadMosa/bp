@@ -6,20 +6,20 @@ import {
 } from "../../actions/DepositAction";
 import { ColumnChart, DateLineChart } from "@iyadmosa/react-library";
 
-export const DepositPersonChart = () => {
+export const DepositPersonChart = ({ from, to }) => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(listPointsByPerson());
+    dispatch(listPointsByPerson(from, to));
   }, []);
   const points = useSelector((state) => state.deposit.personPoints);
 
   return <ColumnChart points={points} title={"Deposit Per Person"} />;
 };
 
-export const DepositDateChart = () => {
+export const DepositDateChart = ({ from, to }) => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(listPointsByDate());
+    dispatch(listPointsByDate(from, to));
   }, []);
   const points = useSelector((state) => state.deposit.datePoints);
   return (

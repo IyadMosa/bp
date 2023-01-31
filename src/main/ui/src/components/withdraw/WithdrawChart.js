@@ -6,20 +6,20 @@ import {
 } from "../../actions/WithdrawAction";
 import { ColumnChart, PieChart } from "@iyadmosa/react-library";
 
-export const DetailedWithdrawChart = ({ disabled = false }) => {
+export const DetailedWithdrawChart = ({ from, to }) => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(listPointsByReason());
+    dispatch(listPointsByReason(from, to));
   }, []);
   const points = useSelector((state) => state.withdraw.points);
 
   return <ColumnChart points={points} title={"Withdraw Per reason"} />;
 };
 
-export const WithdrawChart = ({ disabled = false }) => {
+export const WithdrawChart = ({ from, to }) => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(listPointsByReasonMajor());
+    dispatch(listPointsByReasonMajor(from, to));
   }, []);
   const points = useSelector((state) => state.withdraw.majorPoints);
   return <PieChart points={points} title={"Withdraw"} />;
