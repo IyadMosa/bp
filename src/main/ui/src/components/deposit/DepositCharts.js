@@ -22,9 +22,12 @@ export const DepositDateChart = ({ from, to }) => {
     dispatch(listPointsByDate(from, to));
   }, []);
   const points = useSelector((state) => state.deposit.datePoints);
+  const points_updated = points?.map((deposit) => {
+    return { date: deposit.label, value: deposit.value };
+  });
   return (
     <DateLineChart
-      points={points}
+      points={points_updated}
       title={"Deposit per month"}
       yLabel={"Total (NIS)"}
     />
