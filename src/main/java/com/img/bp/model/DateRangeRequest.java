@@ -9,7 +9,7 @@ import java.util.Date;
 import static com.img.bp.helper.Constants.DATE_STANDER_FORMAT_2;
 
 @Data
-public class SearchDateRangeRequestDTO {
+public class DateRangeRequest {
     @DateTimeFormat(pattern = DATE_STANDER_FORMAT_2)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATE_STANDER_FORMAT_2)
     private Date from;

@@ -6,7 +6,6 @@ import com.img.bp.document.Deposit;
 import com.img.bp.model.DatePoint;
 import com.img.bp.model.Point;
 import com.img.bp.repository.DepositRepository;
-import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,14 +25,12 @@ public class DepositService {
 
     private final DepositRepository repository;
 
-    private final RestHighLevelClient client;
 
     private final SearchService searchService;
 
     @Autowired
-    public DepositService(DepositRepository repository, RestHighLevelClient client, SearchService searchService) {
+    public DepositService(DepositRepository repository, SearchService searchService) {
         this.repository = repository;
-        this.client = client;
         this.searchService = searchService;
     }
 
@@ -57,14 +54,23 @@ public class DepositService {
         repository.deleteById(id);
     }
 
-    public List<Point> getAllPointsByPerson(Date from, Date to) {
-        HashMap<String, Point> map = new HashMap<>();
-        List<Deposit> list = new ArrayList<>();
+
+    private List<Deposit> getDepositsList(Date from, Date to) {
+        List<Deposit> list;
         if (from == null) {
             list = findAll();
         } else {
+            if (to == null) {
+                to = new Date();
+            }
             list = searchService.searchByDateRange(Deposit.class, DEPOSIT_INDEX_NAME, "date", from, to);
         }
+        return list;
+    }
+
+    public List<Point> getAllPointsByPerson(Date from, Date to) {
+        HashMap<String, Point> map = new HashMap<>();
+        List<Deposit> list = getDepositsList(from, to);
         list.forEach(deposit -> {
             String key = deposit.getPerson();
             Long value = deposit.getAmount();
@@ -78,19 +84,20 @@ public class DepositService {
         return new ArrayList<>(map.values());
     }
 
-    public Point getDepositPoint() {
+    public Point getDepositPoint(Date from, Date to) {
         AtomicLong total = new AtomicLong();
-        findAll().forEach(deposit -> {
+        List<Deposit> list = getDepositsList(from, to);
+        list.forEach(deposit -> {
             total.addAndGet(deposit.getAmount());
         });
         return new Point("Deposit", total.get());
     }
 
-    public List<DatePoint> getAllPointsByDate() {
+    public List<DatePoint> getAllPointsByDate(Date from, Date to) {
         HashMap<String, DatePoint> map = new HashMap<>();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/yyyy");
-        List<Deposit> all = findAll();
-        all.forEach(deposit -> {
+        List<Deposit> list = getDepositsList(from, to);
+        list.forEach(deposit -> {
             String key = simpleDateFormat.format(deposit.getDate());
             Long value = deposit.getAmount();
             if (map.get(key) != null) {

@@ -2,7 +2,6 @@ package com.img.bp.controller;
 
 import com.img.bp.document.Deposit;
 import com.img.bp.document.Withdraw;
-import com.img.bp.model.Point;
 import com.img.bp.model.WithdrawRequest;
 import com.img.bp.service.DepositService;
 import com.img.bp.service.WithdrawService;
@@ -41,16 +40,6 @@ public class WithdrawController {
     @GetMapping
     public ResponseEntity<List<Withdraw>> getAll() {
         return new ResponseEntity<>(service.findAll(), HttpStatus.FOUND);
-    }
-
-    @GetMapping("/points-by-reason/{majorOnly}")
-    public ResponseEntity<List<Point>> getAllPointsByReason(@PathVariable boolean majorOnly) {
-        return new ResponseEntity<>(service.getAllPointsByReason(majorOnly), HttpStatus.FOUND);
-    }
-
-    @GetMapping("/point")
-    public ResponseEntity<Point> getDepositPoint() {
-        return new ResponseEntity<>(service.getWithdrawPoint(), HttpStatus.FOUND);
     }
 
     @DeleteMapping
