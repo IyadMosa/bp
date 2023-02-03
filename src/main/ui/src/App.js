@@ -1,20 +1,21 @@
 import "./App.css";
-import { Main } from "./components/main/Main";
+import { Dashboard } from "./components/dashboard/Dashboard";
 import { Provider } from "react-redux";
 import store from "./store";
-import { MainScreen, EmptyScreen } from "@iyadmosa/react-library";
+import { MainScreen } from "@iyadmosa/react-library";
 import { Deposits } from "./components/deposit/Deposits";
 import { Withdraws } from "./components/withdraw/Withdraws";
 import React from "react";
 import { Reasons } from "./components/reason/Reasons";
 import { Persons } from "./components/person/Persons";
+
 function App() {
-  const brand = { name: "NavbarScroller", to: "/main" };
+  const brand = { name: "NavbarScroller", to: "/dashboard" };
   const links = [
     {
-      name: "Main",
-      to: "/main",
-      component: <EmptyScreen title={"Dashboard"} page={<Main />} />,
+      name: "Dashboard",
+      to: "/dashboard",
+      component: <Dashboard />,
     },
     {
       name: "Deposits",
