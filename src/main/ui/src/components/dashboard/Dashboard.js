@@ -58,6 +58,8 @@ export const Dashboard = () => {
     <DashboardScreen
       title={"Dashboard"}
       charts={charts}
+      setFrom={setFrom}
+      setTo={setTo}
       onInit={() => dispatch(listPointsAllComponents(from, to))}
     />
   );
