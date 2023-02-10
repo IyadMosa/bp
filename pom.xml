@@ -123,30 +123,28 @@
             <!--					<nodeVersion>v17.9.0</nodeVersion>-->
             <!--				</configuration>-->
             <!--			</plugin>-->
-            <!--			<plugin>-->
-            <!--				<artifactId>maven-resources-plugin</artifactId>-->
-            <!--				<version>3.2.0</version>-->
-            <!--				<executions>-->
-            <!--					<execution>-->
-            <!--						<id>copy-resources</id>-->
-            <!--						<phase>generate-resources</phase>-->
-            <!--						<goals>-->
-            <!--							<goal>copy-resources</goal>-->
-            <!--						</goals>-->
-            <!--						<configuration>-->
-            <!--							<outputDirectory>${basedir}/src/main/resources/public/</outputDirectory>-->
-            <!--							<resources>-->
-            <!--								<resource>-->
-            <!--									<directory>${basedir}/src/main/ui/build/</directory>-->
-            <!--									<includes>-->
-            <!--										<include>index.html</include>-->
-            <!--									</includes>-->
-            <!--								</resource>-->
-            <!--							</resources>-->
-            <!--						</configuration>-->
-            <!--					</execution>-->
-            <!--				</executions>-->
-            <!--			</plugin>-->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.6.0</version>
+                <executions>
+                    <execution>
+                        <id>npm-build</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>npm</executable>
+                            <arguments>
+                                <argument>run</argument>
+                                <argument>build</argument>
+                            </arguments>
+                            <workingDirectory>${basedir}/src/main/ui</workingDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>3.2.0</version>
