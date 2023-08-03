@@ -40,7 +40,19 @@ public class ReasonService {
         repository.deleteAll();
     }
 
-    public String getMajorByMinor(String minor) {
-        return repository.findFirstByMinor(minor).getMajor();
+    public String getMajorByName(String name) {
+        try {
+            return repository.findFirstByName(name).getMajor();
+        }catch (Exception e){
+            return null;
+        }
+    }
+
+    public String getMinorByName(String name) {
+        try {
+            return repository.findFirstByName(name).getMinor();
+        }catch (Exception e){
+            return null;
+        }
     }
 }

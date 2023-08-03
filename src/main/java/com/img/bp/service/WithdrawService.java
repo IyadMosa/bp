@@ -65,13 +65,16 @@ public class WithdrawService {
         return list;
     }
 
-    public List<Point> getAllPointsByReason(boolean majorOnly, Date from, Date to) {
+    public List<Point> getAllPointsByReason(boolean majorOnly, boolean minorOnly, Date from, Date to) {
         HashMap<String, Point> map = new HashMap<>();
         List<Withdraw> list = getWithdrawsList(from, to);
         list.forEach(withdraw -> {
             String key = withdraw.getReason();
             if (majorOnly) {
-                key = reasonService.getMajorByMinor(key);
+                key = reasonService.getMajorByName(key);
+            }
+            if (minorOnly) {
+                key = reasonService.getMinorByName(key);
             }
             Long value = withdraw.getAmount();
             if (map.get(key) != null) {

@@ -11,12 +11,19 @@ export const Reasons = () => {
       accessor: "id",
     },
     {
+      Header: "Name",
+      accessor: "name",
+    },
+    {
       Header: "Major",
       accessor: "major",
     },
     {
       Header: "Minor",
       accessor: "minor",
+    }, {
+      Header: "Minor2",
+      accessor: "minor2",
     },
   ];
 
@@ -25,6 +32,7 @@ export const Reasons = () => {
   const emptyValue = {
     major: "",
     minor: "",
+    minor2: "",
   };
   const [value, setValue] = useState(emptyValue);
   useEffect(() => {

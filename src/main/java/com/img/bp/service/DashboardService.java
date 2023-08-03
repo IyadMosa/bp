@@ -35,8 +35,8 @@ public class DashboardService {
         });
         map.computeIfAbsent("deposit_person", k -> depositService.getAllPointsByPerson(from, to));
         map.computeIfAbsent("deposit_date", k -> depositService.getAllPointsByDate(from, to));
-        map.computeIfAbsent("withdraw_major", k -> withdrawService.getAllPointsByReason(true, from, to));
-        map.computeIfAbsent("withdraw_minor", k -> withdrawService.getAllPointsByReason(false, from, to));
+        map.computeIfAbsent("withdraw_major", k -> withdrawService.getAllPointsByReason(true, false, from, to));
+        map.computeIfAbsent("withdraw_minor", k -> withdrawService.getAllPointsByReason(false, true, from, to));
         return map;
     }
 }

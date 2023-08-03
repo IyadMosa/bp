@@ -28,4 +28,7 @@ public class Reason {
 
     @Field(type = FieldType.Text)
     private String minor;
+
+    @Field(type = FieldType.Text)
+    private String minor2;
 }

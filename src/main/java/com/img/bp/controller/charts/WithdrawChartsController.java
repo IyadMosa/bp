@@ -25,7 +25,7 @@ public class WithdrawChartsController {
 
     @PostMapping("/points-by-reason/{majorOnly}")
     public ResponseEntity<List<Point>> getAllPointsByReason(@PathVariable boolean majorOnly, @RequestBody DateRangeRequest dateRangeRequest) {
-        return new ResponseEntity<>(service.getAllPointsByReason(majorOnly, dateRangeRequest.getFrom(), dateRangeRequest.getTo()), HttpStatus.FOUND);
+        return new ResponseEntity<>(service.getAllPointsByReason(majorOnly, false, dateRangeRequest.getFrom(), dateRangeRequest.getTo()), HttpStatus.FOUND);
     }
 
     @PostMapping("/point")
