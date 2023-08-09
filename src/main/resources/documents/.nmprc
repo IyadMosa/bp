@@ -1,0 +1,4 @@
+@iyadmosa:registry=https://npm.pkg.github.com/
+//npm.pkg.github.com/:_authToken=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
+strict-ssl=false
+always-auth=true
