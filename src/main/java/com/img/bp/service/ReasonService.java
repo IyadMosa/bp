@@ -24,7 +24,9 @@ public class ReasonService {
     }
 
     public void add(Reason reason) throws Exception {
-        reason.setName(reason.getMinor());
+        if (reason.getName().isEmpty()) {
+            reason.setName(reason.getMajor() + "-" + reason.getMinor() + "-" + reason.getMinor2());
+        }
         repository.save(reason);
     }
 
@@ -43,7 +45,7 @@ public class ReasonService {
     public String getMajorByName(String name) {
         try {
             return repository.findFirstByName(name).getMajor();
-        }catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
     }
@@ -51,7 +53,7 @@ public class ReasonService {
     public String getMinorByName(String name) {
         try {
             return repository.findFirstByName(name).getMinor();
-        }catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
     }
