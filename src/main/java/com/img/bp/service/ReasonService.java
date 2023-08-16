@@ -3,6 +3,7 @@ package com.img.bp.service;
 import com.google.common.collect.Lists;
 import com.img.bp.document.Reason;
 import com.img.bp.repository.ReasonRepository;
+import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class ReasonService {
     }
 
     public void add(Reason reason) throws Exception {
-        if (reason.getName().isEmpty()) {
+        if (StringUtils.isEmpty(reason.getName())) {
             reason.setName(reason.getMajor() + "-" + reason.getMinor() + "-" + reason.getMinor2());
         }
         repository.save(reason);

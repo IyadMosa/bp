@@ -1,6 +1,5 @@
 package com.img.bp.controller;
 
-import com.img.bp.document.Deposit;
 import com.img.bp.document.Reason;
 import com.img.bp.service.ReasonService;
 import org.springframework.http.HttpStatus;
