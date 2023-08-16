@@ -18,6 +18,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @RestController
 @RequestMapping("/api/database")
@@ -44,7 +46,17 @@ public class BackupRestService {
     @GetMapping
     @Produces({MediaType.APPLICATION_JSON})
     public void downloadBackup(HttpServletResponse response) throws Exception {
-        String fileName = "data-backup.json";
+        // Get the current date
+        Date currentDate = new Date();
+
+        // Define the desired date format
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy-HH-mm");
+
+        // Format the current date using the defined format
+        String formattedDate = dateFormat.format(currentDate);
+
+        // Create the file name
+        String fileName = "data-backup-" + formattedDate + ".json";
         OutputStream os = new FileOutputStream(fileName);
         backupService.exportBackup(os);
         response.addHeader("content-disposition", "attachment; filename=" + fileName);
