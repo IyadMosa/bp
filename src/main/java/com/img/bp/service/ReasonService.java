@@ -58,4 +58,24 @@ public class ReasonService {
             return null;
         }
     }
+
+    public String getPropertyByName(String name, String property) {
+        try {
+            String key = null;
+            switch (property) {
+                case "major":
+                    key = repository.findFirstByName(name).getMajor();
+                    break;
+                case "minor":
+                    key = repository.findFirstByName(name).getMinor();
+                    break;
+                case "minor2":
+                    key = repository.findFirstByName(name).getMinor2();
+                    break;
+            }
+            return key;
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

@@ -15,6 +15,7 @@ export const Dashboard = () => {
     total,
     withdraw_major,
     withdraw_minor,
+    withdraw_minor2,
     deposit_person,
     deposit_date,
   } = all;
@@ -48,9 +49,16 @@ export const Dashboard = () => {
     ],
     [
       {
-        title: "Withdraw Per reason",
+        title: "Withdraw Per reason minor",
         type: "Column",
         points: withdraw_minor,
+      },
+    ],
+    [
+      {
+        title: "Withdraw Per reason details",
+        type: "Column",
+        points: withdraw_minor2,
       },
     ],
   ];

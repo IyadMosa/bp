@@ -87,6 +87,24 @@ public class WithdrawService {
         return new ArrayList<>(map.values());
     }
 
+
+    public List<Point> getAllPointsByReason(String property, Date from, Date to) {
+        HashMap<String, Point> map = new HashMap<>();
+        List<Withdraw> list = getWithdrawsList(from, to);
+        list.forEach(withdraw -> {
+            String key = reasonService.getPropertyByName(withdraw.getReason(), property);
+            Long value = withdraw.getAmount();
+            if (map.get(key) != null) {
+                long total = map.get(key).getValue() + value;
+                map.put(key, new Point(key, total));
+            } else {
+                map.put(key, new Point(key, value));
+            }
+        });
+        return new ArrayList<>(map.values());
+    }
+
+
     public Point getWithdrawPoint(Date from, Date to) {
         AtomicLong total = new AtomicLong();
         List<Withdraw> list = getWithdrawsList(from, to);
