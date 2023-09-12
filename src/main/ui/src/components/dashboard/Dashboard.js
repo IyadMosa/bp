@@ -56,9 +56,48 @@ export const Dashboard = () => {
     ],
     [
       {
-        title: "Withdraw Per reason details",
-        type: "Column",
-        points: withdraw_minor2,
+        title: "Withdraw Per reason details (Construction)",
+        type: "table",
+        table_columns: [
+          {
+            Header: "Reason",
+            accessor: "label",
+            style: {
+              textAlign: "center",
+            },
+          },
+          {
+            Header: "Value",
+            accessor: "value",
+            style: {
+              textAlign: "center",
+            },
+          },
+        ],
+        table_data: withdraw_minor2,
+      },
+    ],
+    [
+      {
+        title: "Withdraw Per reason details (Building Permit)",
+        type: "table",
+        table_columns: [
+          {
+            Header: "Reason",
+            accessor: "label",
+            style: {
+              textAlign: "center",
+            },
+          },
+          {
+            Header: "Value",
+            accessor: "value",
+            style: {
+              textAlign: "center",
+            },
+          },
+        ],
+        table_data: withdraw_minor2,
       },
     ],
   ];
@@ -69,6 +108,7 @@ export const Dashboard = () => {
       setFrom={setFrom}
       setTo={setTo}
       onInit={() => dispatch(listPointsAllComponents(from, to))}
+      refresh={false}
     />
   );
 };
