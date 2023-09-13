@@ -69,6 +69,7 @@ export const Withdraws = () => {
       onInit={() => dispatch(listAllWithdraws())}
       modelTitle={"addn new withdraw"}
       disabledSubmit={disabledSubmit}
+      pageSize={100}
     />
   );
 };
