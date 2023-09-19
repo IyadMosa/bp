@@ -8,6 +8,7 @@ import {Withdraws} from "./components/withdraw/Withdraws";
 import React from "react";
 import {Reasons} from "./components/reason/Reasons";
 import {Persons} from "./components/person/Persons";
+import {Configuration} from "./components/configuration/Configuration";
 
 function App() {
     const brand = {name: "NavbarScroller", to: "/dashboard"};
@@ -36,6 +37,12 @@ function App() {
             name: "Reasons",
             to: "/reasons",
             component: <Reasons/>,
+        }
+        ,
+        {
+            name: "Configuration",
+            to: "/configuration",
+            component: <Configuration/>,
         }
     ];
 

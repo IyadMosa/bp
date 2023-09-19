@@ -4,6 +4,7 @@ import withdrawReducer from "./WithdrawReducer";
 import personReducer from "./PersonReducer";
 import reasonReducer from "./ReasonReducer";
 import dashboardReducer from "./DashboardReducer";
+import configurationReducer from "./ConfigurationReducer";
 
 export default combineReducers({
   deposit: depositReducer,
@@ -11,4 +12,5 @@ export default combineReducers({
   person: personReducer,
   reason: reasonReducer,
   dashboard: dashboardReducer,
+  configuration: configurationReducer,
 });

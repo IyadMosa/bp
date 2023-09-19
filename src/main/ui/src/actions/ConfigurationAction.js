@@ -1,13 +1,19 @@
-import {RestRequest, RestRequestWithSave} from "./RestRequest";
-import { GET_ALL_PERSONS } from "./types";
+import {RestRequest} from "./RestRequest";
+import {CONFIGURATION_FILES_GET_ALL} from "./types";
 
-export const exportConfiguration = () => (dispatch) =>
-  RestRequestWithSave(
-    "/api/database",
-    "GT",
-    null,
-    "backup.zip"
-  )(dispatch).catch((error) => {
-    return Promise.reject(error);
-  });
-
+export const listPersons = () => (dispatch, getState) =>
+    RestRequest(
+        "/api/person/",
+        "GET",
+        null,
+        "get persons success"
+    )(dispatch, getState)
+        .then((data) => {
+            dispatch({
+                type: CONFIGURATION_FILES_GET_ALL,
+                payload: data,
+            });
+        })
+        .catch((error) => {
+            return Promise.reject(error);
+        });

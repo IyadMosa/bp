@@ -21,3 +21,6 @@ export const GET_ALL_REASONS = "GET_ALL_REASONS";
 
 //Dashboard
 export const DASHBOARD_GET_ALL = "DASHBOARD_GET_ALL";
+
+//Configuration
+export const CONFIGURATION_FILES_GET_ALL = "CONFIGURATION_FILES_GET_ALL";

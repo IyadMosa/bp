@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,6 +25,9 @@ import java.util.Date;
 @RestController
 @RequestMapping("/api/database")
 public class BackupRestService {
+
+    @Value("${backup.location}")
+    private String backupLocation;
 
     @SuppressWarnings("unused")
     Logger logger = LoggerFactory.getLogger(BackupRestService.class);
@@ -57,10 +61,35 @@ public class BackupRestService {
 
         // Create the file name
         String fileName = "data-backup-" + formattedDate + ".json";
-        OutputStream os = new FileOutputStream(fileName);
+        String backupFilePath = backupLocation + fileName;
+        OutputStream os = new FileOutputStream(backupFilePath);
         backupService.exportBackup(os);
         response.addHeader("content-disposition", "attachment; filename=" + fileName);
-        copyToStream(fileName, response.getOutputStream());
+        copyToStream(backupFilePath, response.getOutputStream());
+    }
+
+    @Operation(
+            operationId = "backup",
+            summary = "backup",
+            description = "Backup all(except for read-only)",
+            tags = {"Backup"})
+    @GetMapping("/backup")
+    @Produces({MediaType.APPLICATION_JSON})
+    public void backup() throws Exception {
+        // Get the current date
+        Date currentDate = new Date();
+
+        // Define the desired date format
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy-HH-mm");
+
+        // Format the current date using the defined format
+        String formattedDate = dateFormat.format(currentDate);
+
+        // Create the file name
+        String fileName = "data-backup-" + formattedDate + ".json";
+        String backupFilePath = backupLocation + fileName;
+        OutputStream os = new FileOutputStream(backupFilePath);
+        backupService.exportBackup(os);
     }
 
     @Operation(
