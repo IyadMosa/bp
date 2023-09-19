@@ -8,10 +8,6 @@ import { listAllDeposits } from "../../actions/DepositAction";
 export const Withdraws = () => {
   const depositsColumns = [
     {
-      Header: "ID",
-      accessor: "id",
-    },
-    {
       Header: "Amount",
       accessor: "amount",
     },
@@ -69,7 +65,7 @@ export const Withdraws = () => {
       onInit={() => dispatch(listAllWithdraws())}
       modelTitle={"addn new withdraw"}
       disabledSubmit={disabledSubmit}
-      pageSize={100}
+      pageSize={200}
     />
   );
 };
