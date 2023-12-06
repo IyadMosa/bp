@@ -9,6 +9,7 @@ import React from "react";
 import {Reasons} from "./components/reason/Reasons";
 import {Persons} from "./components/person/Persons";
 import {Configuration} from "./components/configuration/Configuration";
+import {DashboardTables} from "./components/dashboard/DashboardTables";
 
 function App() {
     const brand = {name: "NavbarScroller", to: "/dashboard"};
@@ -17,6 +18,11 @@ function App() {
             name: "Dashboard",
             to: "/dashboard",
             component: <Dashboard/>,
+        },
+        {
+            name: "Dashboard Tables",
+            to: "/dashboard-tables",
+            component: <DashboardTables/>,
         },
         {
             name: "Deposits",

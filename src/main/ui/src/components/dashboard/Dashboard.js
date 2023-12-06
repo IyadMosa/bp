@@ -77,29 +77,6 @@ export const Dashboard = () => {
         table_data: withdraw_minor2,
       },
     ],
-    [
-      {
-        title: "Withdraw Per reason details (Building Permit)",
-        type: "table",
-        table_columns: [
-          {
-            Header: "Reason",
-            accessor: "label",
-            style: {
-              textAlign: "center",
-            },
-          },
-          {
-            Header: "Value",
-            accessor: "value",
-            style: {
-              textAlign: "center",
-            },
-          },
-        ],
-        table_data: withdraw_minor2,
-      },
-    ],
   ];
   return (
     <DashboardScreen
